@@ -1,34 +1,120 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+---
+title: clone ai chatbot vercel project
+description: build my own gpt chatbot
+author: haimtran
+publishedDate: 20/07/2022
+date: 2022-07-20
+---
 
-## Getting Started
+## Introduction
 
-First, run the development server:
+This [GitHub]() clone the sample ai chatbot project from vercel to learn how to build my own chatbot.
+
+- Frontend: tailwind, radixui, nextjs
+- Backend: chatgpt
+
+## Project Structure
+
+Let create a new nextjs project
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+npx create-next-app@latest
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Install some dependencies
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm install package.json
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Project structure
 
-## Learn More
+```
+|--app
+   |--global.css
+   |--layout.tsx
+   |--page.tsx
+|--components
+   |--ui
+      |--button.tsx
+      |--icons.tsx
+   |--external-link.tsx
+   |--footer.tsx
+   |--header.tsx
+   |--login-button.tsx
+|--lib
+   |--utils.ts
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Header
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Let create a simple header
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- header: sticky, h-16, flex, justify-between
+- left side: logo and login button
+- right side: github and deploy button
 
-## Deploy on Vercel
+```ts
+import Link from "next/link";
+import {
+  IconGitHub,
+  IconNextChat,
+  IconSeparator,
+  IconVercel,
+} from "./ui/icons";
+import { buttonVariants } from "./ui/button";
+import { cn } from "@/lib/utils";
+import { LoginButton } from "./login-button";
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+const Header = () => {
+  return (
+    <header className="sticky top-0 z-50 flex items-center justify-between w-full h-16 px-4 border-b shrink-0 bg-gradient-to-b from-background/10 via-background/50 to-background/80 backdrop-blur-xl">
+      <div className="flex items-center">
+        <Link href={"#"} target="_blank" rel={"nofollow"}>
+          <IconNextChat
+            className="w-6 h-6 mr-2 dark:hidden"
+            inverted
+          ></IconNextChat>
+          <IconNextChat className="hidden w-6 h-6 mr-2 dark:block"></IconNextChat>
+        </Link>
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+        <div className="flex items-center">
+          <IconSeparator className="w-6 h-6 text-muted-foreground/50" />
+          <LoginButton
+            variant="link"
+            showGithubIcon={true}
+            text="Login with Vercel"
+            className={cn(buttonVariants())}
+          />
+        </div>
+      </div>
+
+      <div className="flex items-center justify-end space-x-2">
+        <a
+          target="_blank"
+          href="#"
+          rel="noopener noreferrer"
+          className={cn(buttonVariants({ variant: "outline" }))}
+        >
+          <IconGitHub></IconGitHub>
+          <span className="hidden ml-2 md:flex">GitHub</span>
+        </a>
+
+        <a href="#" target="_blank" className={cn(buttonVariants())}>
+          <IconVercel className="mr-2"></IconVercel>
+          <span className="hidden sm:block">Deploy to Vercel</span>
+          <span className="sm:hidden">Deploy</span>
+        </a>
+      </div>
+    </header>
+  );
+};
+
+export default Header;
+```
+
+## Reference
+
+- [vercel ai chatbot project sample](https://github.com/vercel-labs/ai-chatbot/tree/main)
+
+- [chat vercel ai](https://chat.vercel.ai/)

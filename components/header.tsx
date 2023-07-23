@@ -5,8 +5,7 @@ import {
   IconSeparator,
   IconVercel,
 } from "./ui/icons";
-import { Button, buttonVariants } from "./ui/button";
-import { link } from "fs";
+import { buttonVariants } from "./ui/button";
 import { cn } from "@/lib/utils";
 import { LoginButton } from "./login-button";
 
